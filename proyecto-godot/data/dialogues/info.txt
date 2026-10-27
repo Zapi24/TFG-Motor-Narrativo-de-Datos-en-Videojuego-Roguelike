@@ -1,0 +1,1 @@
+En este directorio se incluyen los distintos csv de donde se recopila la información de las secuencias para el Visual Novel.

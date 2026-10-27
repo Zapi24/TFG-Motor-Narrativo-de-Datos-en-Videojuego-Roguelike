@@ -1,0 +1,1 @@
+En este directorio se incluyen material para los estilos de marcos, botones, texturas para el contenedor de Texto de la novela visual.

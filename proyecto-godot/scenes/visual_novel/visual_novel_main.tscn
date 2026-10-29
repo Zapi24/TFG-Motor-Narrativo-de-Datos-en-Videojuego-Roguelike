@@ -1,5 +1,8 @@
 [gd_scene format=3 uid="uid://h1x5b60736nb"]
 
+[ext_resource type="Script" uid="uid://dxd0dtkngfl4d" path="res://scripts/visual_novel/visual_novel_main.gd" id="1_4ji1q"]
+[ext_resource type="Script" uid="uid://c5bvg03ajw324" path="res://scripts/visual_novel/renderizador_ui.gd" id="2_qhp5r"]
+
 [node name="VisualNovelMain" type="Control" unique_id=1570209122]
 layout_mode = 3
 anchors_preset = 15
@@ -7,7 +10,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_4ji1q")
 metadata/_edit_use_anchors_ = true
+
+[node name="RenderizadorUI" type="Node" parent="." unique_id=641130275]
+script = ExtResource("2_qhp5r")
 
 [node name="GestorDatos" type="Node" parent="." unique_id=494143456]
 

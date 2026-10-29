@@ -8,7 +8,7 @@ const LectorCSVScript = preload("res://scripts/visual_novel/lector_csv.gd")
 const RenderizadorUIScript = preload("res://scripts/visual_novel/renderizador_ui.gd")
 
 @onready var lector_csv: LectorCSVScript = $GestorDatos
-@onready var renderizador_ui: RenderizadorUIScript = $GestorUI
+@onready var renderizador_ui: RenderizadorUIScript = $RenderizadorUI
 
 # Variables globales
 var guion: Array[Dictionary] = []

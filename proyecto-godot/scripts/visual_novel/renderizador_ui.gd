@@ -26,8 +26,8 @@ func renderizar_pantalla(linea_actual: Dictionary) -> void:
 		
 	# Imagen del personaje
 	if not linea_actual["ruta_personaje"].is_empty() && ResourceLoader.exists(linea_actual["ruta_personaje"]):
-		fondo.texture = load(linea_actual["ruta_personaje"])
-		fondo.show()
+		personaje.texture = load(linea_actual["ruta_personaje"])
+		personaje.show()
 	else:
 		personaje.texture = null
 		personaje.hide()

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dxd0dtkngfl4d" path="res://scripts/visual_novel/visual_novel_main.gd" id="1_4ji1q"]
 [ext_resource type="Script" uid="uid://c5bvg03ajw324" path="res://scripts/visual_novel/renderizador_ui.gd" id="2_qhp5r"]
+[ext_resource type="Script" uid="uid://b2q3s81c1dp3d" path="res://scripts/visual_novel/lector_csv.gd" id="3_lvi1y"]
 
 [node name="VisualNovelMain" type="Control" unique_id=1570209122]
 layout_mode = 3
@@ -13,10 +14,15 @@ grow_vertical = 2
 script = ExtResource("1_4ji1q")
 metadata/_edit_use_anchors_ = true
 
-[node name="RenderizadorUI" type="Node" parent="." unique_id=641130275]
+[node name="RenderizadorUI" type="Node" parent="." unique_id=641130275 node_paths=PackedStringArray("fondo", "personaje", "nombre", "texto")]
 script = ExtResource("2_qhp5r")
+fondo = NodePath("../Fondo")
+personaje = NodePath("../Personaje")
+nombre = NodePath("../ContenedorUI/Margenes/OrganizadorVertical/NombrePersonaje")
+texto = NodePath("../ContenedorUI/Margenes/OrganizadorVertical/TextoDialogo")
 
 [node name="GestorDatos" type="Node" parent="." unique_id=494143456]
+script = ExtResource("3_lvi1y")
 
 [node name="Fondo" type="TextureRect" parent="." unique_id=1077463095]
 layout_mode = 1
@@ -35,6 +41,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
+offset_left = -540.0
+offset_top = -317.0
+offset_bottom = 311.0
 grow_horizontal = 0
 grow_vertical = 2
 expand_mode = 1
@@ -62,9 +71,9 @@ layout_mode = 2
 
 [node name="NombrePersonaje" type="Label" parent="ContenedorUI/Margenes/OrganizadorVertical" unique_id=1923781772]
 layout_mode = 2
-size_flags_horizontal = 0
 
 [node name="TextoDialogo" type="RichTextLabel" parent="ContenedorUI/Margenes/OrganizadorVertical" unique_id=1391056036]
 layout_mode = 2
+size_flags_vertical = 3
 bbcode_enabled = true
 fit_content = true

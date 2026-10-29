@@ -7,8 +7,8 @@ extends Control
 const LectorCSVScript = preload("res://scripts/visual_novel/lector_csv.gd")
 const RenderizadorUIScript = preload("res://scripts/visual_novel/renderizador_ui.gd")
 
-@onready var lector_csv: LectorCSVScript = $GestorDatos
-@onready var renderizador_ui: RenderizadorUIScript = $RenderizadorUI
+@onready var lector_csv: LectorCSVScript = $GestorDatos as LectorCSVScript
+@onready var renderizador_ui: RenderizadorUIScript = $RenderizadorUI as RenderizadorUIScript
 
 # Variables globales
 var guion: Array[Dictionary] = []

@@ -29,6 +29,9 @@ func procesar_csv(ruta_archivo: String) -> Array[Dictionary]:
 		# columnas[3] # "res://assets/personaje.png"	
 		var columnas: PackedStringArray = csv.get_csv_line(",")
 		
+		if columnas.size() < 4:
+			continue
+		
 		# Metemos las columnas en cada fila del diccionario
 		var fila: Dictionary = {
 			"nombre": columnas[0].strip_edges(), # strip_edges elimina espacios en blanco o saltos de linea al principio o al final

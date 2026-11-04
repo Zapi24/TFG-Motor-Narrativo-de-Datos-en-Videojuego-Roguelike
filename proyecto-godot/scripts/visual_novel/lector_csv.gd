@@ -19,6 +19,10 @@ func procesar_csv(ruta_archivo: String) -> Array[Dictionary]:
 	
 	var csv: FileAccess = FileAccess.open(ruta_archivo, FileAccess.READ)
 	
+	# Leemos la primera línea (Nombre, Texto, Fondo, Personaje) y no la guardamos en ningún sitio
+	if not csv.eof_reached():
+		csv.get_csv_line(",")
+	
 	# Recorremos el archivo hasta su ultima linea con información
 	while not csv.eof_reached(): # Devuelve true en cada iteracion hasta que lee cada linea del csv
 	

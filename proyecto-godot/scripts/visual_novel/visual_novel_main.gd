@@ -13,7 +13,7 @@ const RenderizadorUIScript = preload("res://scripts/visual_novel/renderizador_ui
 # Variables globales
 var guion: Array[Dictionary] = []
 var indice_actual: int = 0
-const RUTA_TEST_CSV: String = "res://data/dialogues/test.csv" # Ahora mismo es el unico csv que reconoce
+const RUTA_TEST_CSV: String = "res://data/dialogues/test2.csv" # Ahora mismo es el unico csv que reconoce
 
 func _ready() -> void:
 	guion = lector_csv.procesar_csv(RUTA_TEST_CSV)

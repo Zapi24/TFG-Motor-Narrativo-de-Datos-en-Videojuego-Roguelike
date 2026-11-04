@@ -1,14 +1,14 @@
-Nombre,Texto,Imagen-Fondo,Imagen-Personaje
-Zapi,"¡Uf!... Menos mal, el profesor aún no ha llegado.",res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje.png
-Nacho,"Tranquilo, respira... Tienes suerte de que hoy tocaba clase con el de historia.",res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje3.png
-Nacho,Siempre llega MUY tarde.,res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje3.png
-Zapi,"Ya mano, es que habia un  atasco que flipas con el 9. LO ODIO.",res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje.png
-Nacho,"¿Atasco?, que hablas si vienes andando tú jajaajja.",res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje3.png
-Nadie,. . .,res://assets/backgrounds/fondo.jpg,
-Zapi,"Bueno, ya. Pero es que no vengo de casa. ¿Sabés de donde vengo?",res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje2.png
-Nacho,Y yo que sé mano.,res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje3.png
-Zapi,Pues de estar con tu mamá.,res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje2.png
-Zapi,AJAJAJAJAJ,res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje2.png
-Nacho,Paso de ti. Me voy.,res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje3.png
-Nadie,*Sale de la clase*,res://assets/backgrounds/fondo.jpg,
-Zapi,Ostia?,res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje.png
+Nombre,Texto,Imagen-Fondo,Imagen-Personaje,Tipo-voz
+Zapi,"¡Uf!... Menos mal, el profesor aún no ha llegado.",res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje.png,
+Nacho,"Tranquilo, respira... Tienes suerte de que hoy tocaba clase con el de historia.",res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje3.png,
+Nacho,Siempre llega MUY tarde.,res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje3.png,
+Zapi,"Ya mano, es que habia un  atasco que flipas con el 9. LO ODIO.",res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje.png,
+Nacho,"¿Atasco?, que hablas si vienes andando tú jajaajja.",res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje3.png,
+Nadie,. . .,res://assets/backgrounds/fondo.jpg,,
+Zapi,"Bueno, ya. Pero es que no vengo de casa. ¿Sabés de donde vengo?",res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje2.png,
+Nacho,Y yo que sé mano.,res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje3.png,
+Zapi,Pues de estar con tu mamá.,res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje2.png,
+Zapi,AJAJAJAJAJ,res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje2.png,
+Nacho,Paso de ti. Me voy.,res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje3.png,
+Nadie,*Sale de la clase*,res://assets/backgrounds/fondo.jpg,,
+Zapi,Ostia?,res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje.png,

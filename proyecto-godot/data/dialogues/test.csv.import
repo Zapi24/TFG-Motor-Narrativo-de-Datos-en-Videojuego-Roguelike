@@ -6,10 +6,10 @@ uid="uid://3u8t57lyr2rk"
 
 [deps]
 
-files=["res://data/dialogues/test.Este es el primer texto que se muestra.translation", "res://data/dialogues/test.res://assets/backgrounds/fondo.jpg.translation", "res://data/dialogues/test.res://assets/characters/personaje.png.translation"]
+files=["res://data/dialogues/test.¡Uf!... Menos mal, el profesor aún no ha llegado..translation", "res://data/dialogues/test.res://assets/backgrounds/fondo.jpg.translation", "res://data/dialogues/test.res://assets/characters/personaje.png.translation"]
 
 source_file="res://data/dialogues/test.csv"
-dest_files=["res://data/dialogues/test.Este es el primer texto que se muestra.translation", "res://data/dialogues/test.res://assets/backgrounds/fondo.jpg.translation", "res://data/dialogues/test.res://assets/characters/personaje.png.translation"]
+dest_files=["res://data/dialogues/test.¡Uf!... Menos mal, el profesor aún no ha llegado..translation", "res://data/dialogues/test.res://assets/backgrounds/fondo.jpg.translation", "res://data/dialogues/test.res://assets/characters/personaje.png.translation"]
 
 [params]
 

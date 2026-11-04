@@ -30,6 +30,25 @@ func _process(_delta: float) -> void:
 	elif Input.is_action_just_pressed("ui_left"):
 		retroceder_dialogo()
 		
+# Para los eventos como la tecla espacio/enter/clic del raton 
+func _unhandled_input(event: InputEvent) -> void:
+	var es_espacio_o_enter: bool = event.is_action_pressed("ui_accept")
+	
+	# Detecta si es un clic izquierdo del ratón
+	var es_clic_izquierdo: bool = event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed
+	
+	if es_espacio_o_enter or es_clic_izquierdo:
+		gestionar_avance_interactivo()
+
+func gestionar_avance_interactivo() -> void:
+	# Evaluamos el estado público del renderizador
+	if renderizador_ui.escribiendo:
+		# Si está escribiendo, forzamos el autocompletado de la línea actual
+		renderizador_ui.completar_texto_instantaneamente()
+	else:
+		# Si ya ha terminado de escribir, pasamos al siguiente diálogo
+		avanzar_dialogo()
+		
 # FUnciones auxiliares para avanzar o retroceder
 func avanzar_dialogo() -> void:
 	if indice_actual < guion.size() - 1:

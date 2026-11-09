@@ -90,7 +90,7 @@ func iniciar_escritura() -> void:
 		
 		if not await _esperar_y_validar(VELOCIDAD_BASE, id_actual):
 			return
-		
+		 
 		# Vemos si necesitamos alguna pausa más
 		if not cancelar_animacion:
 			if caracter in [",", ";"]:

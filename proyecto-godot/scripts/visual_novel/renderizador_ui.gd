@@ -12,6 +12,8 @@ extends Node
 var escribiendo: bool = false
 var cancelar_animacion: bool = false 
 var id_escritura: int = 0 # Identificador único para evitar problemas de dos lineas de texto ejecutandose a la vez si se saltan muy rapido
+var tipo_voz_actual: String = "voz1" # Almacena el tipo de voz actual
+
 const VELOCIDAD_BASE: float = 0.03 #  Tiempo normal entre las letras
 const PAUSA_CORTA: float = 0.15    # Pausa para comas
 const PAUSA_LARGA: float = 0.35 # Pausa para puntos, interrogaciones etc
@@ -22,6 +24,9 @@ func renderizar_pantalla(linea_actual: Dictionary) -> void:
 	# Textos:
 	nombre.text = linea_actual["nombre"]
 	texto.text = linea_actual["texto"]
+	
+	# Voz:
+	tipo_voz_actual = linea_actual.get("tipo_voz", "voz1")
 	
 	# Imagen del fondo (siempre habrá una, no puede ser vacio)
 	if not linea_actual["ruta_fondo"].is_empty() && ResourceLoader.exists(linea_actual["ruta_fondo"]):
@@ -59,6 +64,7 @@ func iniciar_escritura() -> void:
 	var texto_limpio: String = texto.get_parsed_text()
 	var long: int = texto_limpio.length()
 	
+	
 	if long == 0: # Hemos introducido un texto vació, asi que no tenemos que poner nada
 		texto.visible_characters = -1
 		escribiendo = false
@@ -77,6 +83,11 @@ func iniciar_escritura() -> void:
 		
 		# Vemos el caracter que acabamos de pasar para ver que tipo de pausa aplicamos
 		var caracter: String = texto.get_parsed_text()[texto.visible_characters - 1]
+		
+		# Reproducimos el sonido (a no ser que sea un espacio)
+		if caracter !=  " " and not voz_personajes.playing :
+			voz_personajes.reproducir_voz(tipo_voz_actual)
+		
 		if not await _esperar_y_validar(VELOCIDAD_BASE, id_actual):
 			return
 		
@@ -95,6 +106,9 @@ func iniciar_escritura() -> void:
 
 func completar_texto_instantaneamente() -> void:
 	cancelar_animacion = true
+	# Cortamos el sonido de golpe si el usuario hace clic para autocompletar la frase
+	if voz_personajes.playing:
+		voz_personajes.stop()
 	
 # Función auxiliar que espera x y valida si el id actual sigue siendo valido
 func _esperar_y_validar(tiempo: float, id_instancia: int) -> bool:

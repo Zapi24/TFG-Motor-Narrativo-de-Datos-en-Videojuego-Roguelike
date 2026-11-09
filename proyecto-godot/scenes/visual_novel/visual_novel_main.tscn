@@ -22,7 +22,7 @@ personaje = NodePath("../Personaje")
 nombre = NodePath("../ContenedorUI/Margenes/OrganizadorVertical/NombrePersonaje")
 texto = NodePath("../ContenedorUI/Margenes/OrganizadorVertical/TextoDialogo")
 
-[node name="VozPersonajes" type="AudioStreamPlayer2D" parent="RenderizadorUI" unique_id=331452388]
+[node name="VozPersonajes" type="AudioStreamPlayer" parent="RenderizadorUI" unique_id=170440890]
 script = ExtResource("3_6jvkb")
 
 [node name="GestorDatos" type="Node" parent="." unique_id=494143456]

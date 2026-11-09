@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dxd0dtkngfl4d" path="res://scripts/visual_novel/visual_novel_main.gd" id="1_4ji1q"]
 [ext_resource type="Script" uid="uid://c5bvg03ajw324" path="res://scripts/visual_novel/renderizador_ui.gd" id="2_qhp5r"]
+[ext_resource type="Script" uid="uid://cli7iayw1duxg" path="res://scripts/visual_novel/player_voice.gd" id="3_6jvkb"]
 [ext_resource type="Script" uid="uid://b2q3s81c1dp3d" path="res://scripts/visual_novel/lector_csv.gd" id="3_lvi1y"]
 
 [node name="VisualNovelMain" type="Control" unique_id=1570209122]
@@ -20,6 +21,9 @@ fondo = NodePath("../Fondo")
 personaje = NodePath("../Personaje")
 nombre = NodePath("../ContenedorUI/Margenes/OrganizadorVertical/NombrePersonaje")
 texto = NodePath("../ContenedorUI/Margenes/OrganizadorVertical/TextoDialogo")
+
+[node name="VozPersonajes" type="AudioStreamPlayer2D" parent="RenderizadorUI" unique_id=331452388]
+script = ExtResource("3_6jvkb")
 
 [node name="GestorDatos" type="Node" parent="." unique_id=494143456]
 script = ExtResource("3_lvi1y")

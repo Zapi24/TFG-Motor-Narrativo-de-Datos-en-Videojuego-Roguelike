@@ -12,4 +12,22 @@ const TIPOS_VOZ = {
 	"voz4": { "tono_base": 0.6, "variacion": 0.02 } # Voz muy grave de ultratumba
 }
 
-func reproducir_voz(perfil: String) -> void:
+func reproducir_voz(voz: String) -> void:
+	
+	if AUDIO == null: # Por si no encontrase el audio.
+		printerr("ERROR: No se ha podido acceder al sonido que se reproduce al avanzar el texto. ")
+		return
+		
+	if stream != AUDIO:
+		stream = AUDIO # Establecemos el objeto stream con nuestro archivo de audio
+		
+	random.randomize() # Establecemos la semilla para generar números aleatorios
+	
+	# Coje la pasada por parámetro y si no la voz1 como voz por defecto
+	var tipo_voz : Dictionary = TIPOS_VOZ.get(voz, TIPOS_VOZ["voz1"]) 
+	
+	var min: float = tipo_voz["tono_base"] - tipo_voz["variacion"]
+	var max: float = tipo_voz["tono_base"] + tipo_voz["variacion"]
+	
+	pitch_scale = random.randf_range(min,max) # Devuelve un float aleatorio entre el min y el max
+	play()

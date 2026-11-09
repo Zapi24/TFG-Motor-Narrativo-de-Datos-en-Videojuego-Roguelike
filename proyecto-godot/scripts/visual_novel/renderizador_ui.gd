@@ -6,6 +6,8 @@ extends Node
 @export var nombre: Label
 @export var texto: RichTextLabel
 
+@onready var voz_personajes: AudioStreamPlayer = $VozPersonajes
+
 # Variables para el texto progresivo
 var escribiendo: bool = false
 var cancelar_animacion: bool = false 

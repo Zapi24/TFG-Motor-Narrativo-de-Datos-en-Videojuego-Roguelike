@@ -16,6 +16,15 @@ var indice_actual: int = 0
 const RUTA_TEST_CSV: String = "res://data/dialogues/test.csv" # Ahora mismo es el unico csv que reconoce
 
 func _ready() -> void:
+	
+	# --- HACK TEMPORAL DE QA ---
+	var ruta_a_cargar: String = RUTA_TEST_CSV
+	
+	# Si venimos del menú de debug y hay una ruta guardada, la sobrescribimos
+	if DebugData.ruta_csv_seleccionada != "":
+		ruta_a_cargar = DebugData.ruta_csv_seleccionada
+	# ---------------------------
+	
 	guion = lector_csv.procesar_csv(RUTA_TEST_CSV)
 	
 	if not guion.is_empty():

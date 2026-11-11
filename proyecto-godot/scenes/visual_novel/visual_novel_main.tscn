@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://c5bvg03ajw324" path="res://scripts/visual_novel/renderizador_ui.gd" id="2_qhp5r"]
 [ext_resource type="Script" uid="uid://cli7iayw1duxg" path="res://scripts/visual_novel/player_voice.gd" id="3_6jvkb"]
 [ext_resource type="Script" uid="uid://b2q3s81c1dp3d" path="res://scripts/visual_novel/lector_csv.gd" id="3_lvi1y"]
+[ext_resource type="FontFile" uid="uid://b82drs6w37yex" path="res://assets/ui/fuente-titulos.ttf" id="5_k243g"]
+[ext_resource type="FontFile" uid="uid://duk8q0ukomram" path="res://assets/ui/fuente-textos.ttf" id="6_4vw31"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ne1xs"]
 bg_color = Color(0, 0, 0, 0.5882353)
@@ -58,20 +60,6 @@ grow_vertical = 2
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Personaje" type="TextureRect" parent="." unique_id=1219516098]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -718.0
-offset_top = -807.0
-grow_horizontal = 0
-grow_vertical = 0
-expand_mode = 1
-stretch_mode = 4
-
 [node name="ContenedorUI" type="Panel" parent="." unique_id=280706777]
 layout_mode = 1
 anchors_preset = 12
@@ -100,17 +88,20 @@ metadata/_edit_use_anchors_ = true
 [node name="NombrePersonaje" type="Label" parent="ContenedorUI/ContenedorNombrePersonaje" unique_id=1923781772]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.016567217
+anchor_left = 0.07413663
 anchor_top = 0.028901394
 anchor_right = 0.9991759
 anchor_bottom = 0.9795188
+offset_top = 9.537781
+grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 0
-metadata/_edit_use_anchors_ = true
+theme_override_fonts/font = ExtResource("5_k243g")
+theme_override_font_sizes/font_size = 32
 
 [node name="Margenes" type="MarginContainer" parent="ContenedorUI" unique_id=1797627028]
 layout_mode = 0
-offset_left = 32.0
+offset_left = 47.0
 offset_top = 51.0
 offset_right = 1860.0
 offset_bottom = 328.0
@@ -122,5 +113,25 @@ theme_override_constants/margin_bottom = 20
 [node name="TextoDialogo" type="RichTextLabel" parent="ContenedorUI/Margenes" unique_id=1391056036]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("6_4vw31")
+theme_override_font_sizes/normal_font_size = 26
+theme_override_font_sizes/bold_font_size = 26
+theme_override_font_sizes/bold_italics_font_size = 26
+theme_override_font_sizes/italics_font_size = 26
+theme_override_font_sizes/mono_font_size = 26
 bbcode_enabled = true
 fit_content = true
+
+[node name="Personaje" type="TextureRect" parent="." unique_id=1219516098]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -718.0
+offset_top = -807.0
+grow_horizontal = 0
+grow_vertical = 0
+expand_mode = 1
+stretch_mode = 4

@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://b2q3s81c1dp3d" path="res://scripts/visual_novel/lector_csv.gd" id="3_lvi1y"]
 [ext_resource type="FontFile" uid="uid://b82drs6w37yex" path="res://assets/ui/fuente-titulos.ttf" id="5_k243g"]
 [ext_resource type="FontFile" uid="uid://duk8q0ukomram" path="res://assets/ui/fuente-textos.ttf" id="6_4vw31"]
+[ext_resource type="Texture2D" uid="uid://jgddc7ayamwr" path="res://assets/ui/siguiente.png" id="7_rxent"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ne1xs"]
 bg_color = Color(0, 0, 0, 0.5882353)
@@ -15,6 +16,8 @@ corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 shadow_color = Color(0.49747366, 0.49747372, 0.49747342, 0.60784316)
 shadow_size = 10
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rxent"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6jvkb"]
 bg_color = Color(0, 0, 0, 0.78431374)
@@ -37,12 +40,13 @@ grow_vertical = 2
 script = ExtResource("1_4ji1q")
 metadata/_edit_use_anchors_ = true
 
-[node name="RenderizadorUI" type="Node" parent="." unique_id=641130275 node_paths=PackedStringArray("fondo", "personaje", "nombre", "texto")]
+[node name="RenderizadorUI" type="Node" parent="." unique_id=641130275 node_paths=PackedStringArray("fondo", "personaje", "nombre", "texto", "imagen_siguiente")]
 script = ExtResource("2_qhp5r")
 fondo = NodePath("../Fondo")
 personaje = NodePath("../Personaje")
 nombre = NodePath("../ContenedorUI/ContenedorNombrePersonaje/NombrePersonaje")
 texto = NodePath("../ContenedorUI/Margenes/TextoDialogo")
+imagen_siguiente = NodePath("../ContenedorUI/ImagenSiguiente")
 
 [node name="VozPersonajes" type="AudioStreamPlayer" parent="RenderizadorUI" unique_id=170440890]
 script = ExtResource("3_6jvkb")
@@ -74,6 +78,22 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ne1xs")
 
+[node name="ImagenSiguiente" type="TextureRect" parent="ContenedorUI" unique_id=1574705772]
+visible = false
+modulate = Color(1, 1, 1, 0.78431374)
+material = SubResource("CanvasItemMaterial_rxent")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9433563
+anchor_top = 0.74085367
+anchor_right = 0.9898643
+anchor_bottom = 0.9512196
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_rxent")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
 [node name="ContenedorNombrePersonaje" type="Panel" parent="ContenedorUI" unique_id=684469609]
 layout_mode = 1
 anchors_preset = -1
@@ -103,7 +123,7 @@ theme_override_font_sizes/font_size = 32
 layout_mode = 0
 offset_left = 47.0
 offset_top = 51.0
-offset_right = 1860.0
+offset_right = 1184.0
 offset_bottom = 328.0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -124,14 +144,13 @@ fit_content = true
 
 [node name="Personaje" type="TextureRect" parent="." unique_id=1219516098]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+anchors_preset = -1
+anchor_left = 0.62604165
+anchor_top = 0.25277779
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -718.0
-offset_top = -807.0
+anchor_bottom = 0.8759259
 grow_horizontal = 0
 grow_vertical = 0
 expand_mode = 1
 stretch_mode = 4
+metadata/_edit_use_anchors_ = true

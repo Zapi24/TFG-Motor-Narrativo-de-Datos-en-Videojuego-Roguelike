@@ -5,6 +5,7 @@ extends Node
 @export var personaje: TextureRect
 @export var nombre: Label
 @export var texto: RichTextLabel
+@export var imagen_siguiente: TextureRect
 
 @onready var voz_personajes: AudioStreamPlayer = $VozPersonajes
 
@@ -13,6 +14,8 @@ var escribiendo: bool = false
 var cancelar_animacion: bool = false 
 var id_escritura: int = 0 # Identificador único para evitar problemas de dos lineas de texto ejecutandose a la vez si se saltan muy rapido
 var tipo_voz_actual: String = "voz1" # Almacena el tipo de voz actual
+
+var tween_indicador: Tween # Para el tween de la imagen de avanzar
 
 const VELOCIDAD_BASE: float = 0.03 #  Tiempo normal entre las letras
 const PAUSA_CORTA: float = 0.15    # Pausa para comas
@@ -55,6 +58,8 @@ func iniciar_escritura() -> void:
 	id_escritura += 1
 	var id_actual: int = id_escritura
 	
+	_ocultar_indicador() # Ocultamos el indicador al empezar una nueva línea
+	
 	escribiendo = true
 	cancelar_animacion = false
 	texto.visible_characters = 0
@@ -68,6 +73,7 @@ func iniciar_escritura() -> void:
 	if long == 0: # Hemos introducido un texto vació, asi que no tenemos que poner nada
 		texto.visible_characters = -1
 		escribiendo = false
+		_mostrar_indicador() # Lo mostramos si la línea está vacía
 		return
 	
 	for i in range(long):
@@ -103,6 +109,9 @@ func iniciar_escritura() -> void:
 	# Al salir ya sea por que ha terminado la secuencia o por que lo hemos cancelado
 	texto.visible_characters = -1 # Para que muestre todo
 	escribiendo = false
+	
+	# Al terminar de escribir toda la frase, activamos la animación visual
+	_mostrar_indicador()
 
 func completar_texto_instantaneamente() -> void:
 	cancelar_animacion = true
@@ -114,5 +123,33 @@ func completar_texto_instantaneamente() -> void:
 func _esperar_y_validar(tiempo: float, id_instancia: int) -> bool:
 	await get_tree().create_timer(tiempo).timeout
 	return id_instancia == id_escritura
+	
+# Funciones auxiliares 
+func _mostrar_indicador() -> void:
+	if imagen_siguiente == null:
+		return
+		
+	imagen_siguiente.show()
+	imagen_siguiente.modulate.a = 0.8 # Reseteamos la opacidad
+	
+	# Si ya había una animación funcionando, la detenemos
+	if tween_indicador and tween_indicador.is_running():
+		tween_indicador.kill()
+		
+	# Creamos un nuevo Tween en bucle infinito
+	tween_indicador = create_tween().set_loops()
+	
+	# Animamos la opcacidad para que baje al 30% en 0.6 segundos y vuelva al 100%
+	tween_indicador.tween_property(imagen_siguiente, "modulate:a", 0.3, 0.6).set_trans(Tween.TRANS_SINE)
+	tween_indicador.tween_property(imagen_siguiente, "modulate:a", 0.8, 0.6).set_trans(Tween.TRANS_SINE)
+
+func _ocultar_indicador() -> void:
+	if imagen_siguiente == null:
+		return
+		
+	# Detenemos la animación y ocultamos el nodo
+	if tween_indicador and tween_indicador.is_running():
+		tween_indicador.kill()
+	imagen_siguiente.hide()
 	
 	

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://clkumlmkuhto4"
-path="res://.godot/imported/Fuente-titulos.ttf-ca6bd5150291260597838db03649d9ba.fontdata"
+uid="uid://duk8q0ukomram"
+path="res://.godot/imported/fuente-textos.ttf-e78e6d42ce434160213ba4c6be67bf58.fontdata"
 
 [deps]
 
-source_file="res://assets/ui/Fuente-titulos.ttf"
-dest_files=["res://.godot/imported/Fuente-titulos.ttf-ca6bd5150291260597838db03649d9ba.fontdata"]
+source_file="res://assets/ui/fuente-textos.ttf"
+dest_files=["res://.godot/imported/fuente-textos.ttf-e78e6d42ce434160213ba4c6be67bf58.fontdata"]
 
 [params]
 

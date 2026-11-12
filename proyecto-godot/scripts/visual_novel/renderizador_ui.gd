@@ -6,6 +6,8 @@ extends Node
 @export var nombre: Label
 @export var texto: RichTextLabel
 @export var imagen_siguiente: TextureRect
+@export var fondo_antiguo: TextureRect
+@export var director_animaciones: Node 
 
 @onready var voz_personajes: AudioStreamPlayer = $VozPersonajes
 
@@ -14,6 +16,7 @@ var escribiendo: bool = false
 var cancelar_animacion: bool = false 
 var id_escritura: int = 0 # Identificador único para evitar problemas de dos lineas de texto ejecutandose a la vez si se saltan muy rapido
 var tipo_voz_actual: String = "voz1" # Almacena el tipo de voz actual
+var ruta_fondo_anterior: String = "" # Para ir guardando la ruta de la iamgen de fondo y detectar cuando cambia
 
 var tween_indicador: Tween # Para el tween de la imagen de avanzar
 
@@ -31,10 +34,38 @@ func renderizar_pantalla(linea_actual: Dictionary) -> void:
 	# Voz:
 	tipo_voz_actual = linea_actual.get("tipo_voz", "voz1")
 	
-	# Imagen del fondo (siempre habrá una, no puede ser vacio)
+	
+	var ruta_fondo_actual = linea_actual["ruta_fondo"]
+	
+	# Imagen de fondo: Comprobamos que la ruta no está vacía y el archivo existe
 	if not linea_actual["ruta_fondo"].is_empty() && ResourceLoader.exists(linea_actual["ruta_fondo"]):
-		fondo.texture = load(linea_actual["ruta_fondo"])
-		fondo.show()
+		
+		# Comprobamos si el fondo ha cambiado con respecto al ultimo estado
+		if ruta_fondo_actual != ruta_fondo_anterior:
+			
+			# Caso A: Ejecutamos la transición con la animación
+			if ruta_fondo_anterior != "":
+				fondo_antiguo.texture = fondo.texture
+				fondo_antiguo.show()
+				fondo_antiguo.modulate.a = 1.0
+				
+				fondo.texture = load(ruta_fondo_actual)
+				fondo.show()
+				
+				# Ejecutamos la animación
+				await director_animaciones.crossfade_imagen_fondo(fondo)
+				fondo_antiguo.hide()
+			
+			# Caso B: Lo mostramos de golpe (es la primera vez que se ejecuta)
+			else:
+				fondo.texture = load(ruta_fondo_actual)
+				fondo.modulate.a = 1.0
+				fondo.show()
+			
+			# Actualizamos el fondo actual
+			ruta_fondo_anterior = ruta_fondo_actual
+			
+	# Si no hay ruta o el archivo no existe
 	else: 
 		fondo.texture = null
 		fondo.hide()

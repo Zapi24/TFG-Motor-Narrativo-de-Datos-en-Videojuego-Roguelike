@@ -1,9 +1,9 @@
 Nombre,Texto,Imagen-Fondo,Imagen-Personaje,Tipo-voz
-Zapi,"¡Uf!... Menos mal, el profesor aún no ha llegado.",res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje.png,voz1
-Nacho,"Tranquilo, respira... Tienes suerte de que hoy tocaba clase con el de historia.",res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje3.png,voz2
-Nacho,Siempre llega MUY tarde.,res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje3.png,voz2
-Zapi,"Ya mano, es que habia un  atasco que flipas con el 9. LO ODIO.",res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje.png,voz1
-Nacho,"¿Atasco?, que hablas si vienes andando tú jajaajja.",res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje3.png,voz2
+Zapi,"¡Uf!... Menos mal, el profesor aún no ha llegado.",res://assets/backgrounds/fondo2.jpg,res://assets/characters/personaje.png,voz1
+Nacho,"Tranquilo, respira... Tienes suerte de que hoy tocaba clase con el de historia.",res://assets/backgrounds/fondo2.jpg,res://assets/characters/personaje3.png,voz2
+Nacho,Siempre llega MUY tarde.,res://assets/backgrounds/fondo2.jpg,res://assets/characters/personaje3.png,voz2
+Zapi,"Ya mano, es que habia un  atasco que flipas con el 9. LO ODIO.",res://assets/backgrounds/fondo2.jpg,res://assets/characters/personaje.png,voz1
+Nacho,"¿Atasco?, que hablas si vienes andando tú jajaajja.",res://assets/backgrounds/fondo2.jpg,res://assets/characters/personaje3.png,voz2
 Nadie,. . .,res://assets/backgrounds/fondo.jpg,,voz3
 Zapi,"Bueno, ya. Pero es que no vengo de casa. ¿Sabés de donde vengo?",res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje2.png,voz1
 Nacho,Y yo que sé mano.,res://assets/backgrounds/fondo.jpg,res://assets/characters/personaje3.png,voz2

@@ -41,19 +41,32 @@ grow_vertical = 2
 script = ExtResource("1_4ji1q")
 metadata/_edit_use_anchors_ = true
 
-[node name="RenderizadorUI" type="Node" parent="." unique_id=641130275 node_paths=PackedStringArray("fondo", "personaje", "nombre", "texto", "imagen_siguiente")]
+[node name="RenderizadorUI" type="Node" parent="." unique_id=641130275 node_paths=PackedStringArray("fondo", "personaje", "nombre", "texto", "imagen_siguiente", "fondo_antiguo", "director_animaciones")]
 script = ExtResource("2_qhp5r")
 fondo = NodePath("../Fondo")
 personaje = NodePath("../Personaje")
 nombre = NodePath("../ContenedorUI/ContenedorNombrePersonaje/NombrePersonaje")
 texto = NodePath("../ContenedorUI/Margenes/TextoDialogo")
 imagen_siguiente = NodePath("../ContenedorUI/ImagenSiguiente")
+fondo_antiguo = NodePath("../FondoAntiguo")
+director_animaciones = NodePath("../DirectorAnimaciones")
 
 [node name="VozPersonajes" type="AudioStreamPlayer" parent="RenderizadorUI" unique_id=170440890]
 script = ExtResource("3_6jvkb")
 
 [node name="GestorDatos" type="Node" parent="." unique_id=494143456]
 script = ExtResource("3_lvi1y")
+
+[node name="FondoAntiguo" type="TextureRect" parent="." unique_id=1849678043]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 6
 
 [node name="Fondo" type="TextureRect" parent="." unique_id=1077463095]
 layout_mode = 1

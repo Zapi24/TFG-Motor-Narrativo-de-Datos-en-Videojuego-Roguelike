@@ -115,14 +115,23 @@ func deslizar_personaje(personaje: TextureRect, entrada: bool) -> void:
 		personaje.position = pos_escena # Lo devolvemos a su sitio original en secreto
 
 # Animación personaje: hace un crossfade entre el personaje nuevo y el antiguo
-func crossfade_personaje(nuevo_personaje: TextureRect) -> void:
-	nuevo_personaje.modulate.a = 0.0
-	nuevo_personaje.show()
+func crossfade_personaje(personaje_antiguo: TextureRect, nuevo_personaje: TextureRect) -> void:
+	personaje_antiguo.show()
+	personaje_antiguo.modulate.a = 1.0
 	
-	var tween = create_tween()
-	tween.tween_property(nuevo_personaje, "modulate:a", 1.0, TIEMPO_PERSONAJE_FUNDIDO).set_trans(Tween.TRANS_SINE)
+	nuevo_personaje.show()
+	nuevo_personaje.modulate.a = 0.0
+	
+	var tween = create_tween().set_parallel(true)
+	
+	# Hacmeos desaparecer el personaje
+	tween.tween_property(personaje_antiguo, "modulate:a", 0.0, TIEMPO_PERSONAJE_FUNDIDO).set_trans(Tween.TRANS_SINE)
+	
+	# El personaje nuevo empieza a aparecer cuando el antiguo va por el 40%
+	tween.tween_property(nuevo_personaje, "modulate:a", 1.0, TIEMPO_PERSONAJE_FUNDIDO).set_delay(TIEMPO_PERSONAJE_FUNDIDO * 0.4).set_trans(Tween.TRANS_SINE)
 	
 	await tween.finished
+	personaje_antiguo.hide()
 # Animación personaje: hace un pequeño salto entre la pose del antiguo personaje y el nuevo
 func salto_personaje(personaje: TextureRect) -> void:
 	var pos_original = personaje.position

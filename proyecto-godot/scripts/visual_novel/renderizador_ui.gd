@@ -90,7 +90,7 @@ func renderizar_pantalla(linea_actual: Dictionary) -> void:
 					personaje_antiguo.modulate.a = 1.0	
 					
 					personaje.texture = load(ruta_personaje_actual)
-					await director_animaciones.crossfade_personaje(personaje)
+					await director_animaciones.crossfade_personaje(personaje_antiguo, personaje)
 					
 					personaje_antiguo.hide()
 				else: 

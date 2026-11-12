@@ -2,6 +2,8 @@
 extends Node
 
 @onready var telon_negro: ColorRect = $TelonNegro
+@onready var efecto_shake: Camera2D = $EfectoShake
+@onready var efecto_flash: ColorRect = $EfectoFlash
 
 # Variables globales para controlar el tiempo
 var TIEMPO_TELON: float = 1.0 # Tiempo que tarda el fade in/out de la escena completa
@@ -9,6 +11,9 @@ var TIEMPO_IMAGEN_FONDO = 0.8 # Tiempo quie tarda el crossfade de una imagen de 
 var TIEMPO_PERSONAJE_FUNDIDO: float = 0.25
 var TIEMPO_PERSONAJE_SALTO: float = 0.15
 var TIEMPO_PERSONAJE_DESLIZAMIENTO: float = 0.4
+
+var TIEMPO_EFECTOS: float = 0.5
+var INTENSIDAD_SHAKE: float = 20 # Para controlar la intensidad del shake
 
 
 var DISTANCIA_PERSONAJE_DESLIZAMIENTO: float = 700.0 # Pixeles para salir completamente de la escena
@@ -142,7 +147,36 @@ func salto_personaje(personaje: TextureRect) -> void:
 	# Baja
 	tween.tween_property(personaje, "position:y", pos_original.y, TIEMPO_PERSONAJE_SALTO).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	# No le ponemos un await para que no congele el texto	
+	
+# Efecto flash de pantalla
+func ejecutar_flash() -> void:
+	efecto_flash.modulate.a = 1.0 # Empieza entero en blanco
+	efecto_flash.show()
+	
+	var tween = create_tween()
+	# Lo hacemos transparente
+	tween.tween_property(efecto_flash, "modulate:a", 0.0, TIEMPO_EFECTOS).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	
+	await tween.finished
+	efecto_flash.hide()
 
+# Efecto de sacudir la pantalla
+func ejecutar_shake() -> void: 
+	var tween = create_tween()
+	
+	# Cuantas veces va a sacudirse
+	var sacudidas: float = 10.0
+	var tiempo_por_sacudida: float = TIEMPO_EFECTOS / sacudidas
+	
+	for i in range(sacudidas):
+		# Generamos coordenadas aleatorias entre la intensidad negativa y positiva 
+		var aux = Vector2(randf_range(-INTENSIDAD_SHAKE, INTENSIDAD_SHAKE), randf_range(-INTENSIDAD_SHAKE, INTENSIDAD_SHAKE))
+		tween.tween_property(efecto_shake, "offset", aux, tiempo_por_sacudida)
+		
+		# Devolvemos la cámara a su posicion central
+		tween.chain().tween_property(efecto_shake, "offset", Vector2.ZERO, tiempo_por_sacudida)
+		
+		await tween.finished
 	
 	
 	

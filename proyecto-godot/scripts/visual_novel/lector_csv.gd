@@ -5,6 +5,7 @@
 #     "ruta_fondo": "res://assets/fondo.png",
 #     "ruta_personaje": "res://assets/personaje.png",
 #     "tipo_voz: "voz1"
+#     "efecto: "flash" (solo admite dos tipos de efectos o el flash o el shake)
 # }
 
 extends Node
@@ -33,9 +34,10 @@ func procesar_csv(ruta_archivo: String) -> Array[Dictionary]:
 		# columnas[2] # "res://assets/fondo.png"
 		# columnas[3] # "res://assets/personaje.png"	
 		# columnas[4] # "voz1" (Tipo de voz)
+		# columnas[5] # "flash" 
 		var columnas: PackedStringArray = csv.get_csv_line(",")
 		
-		if columnas.size() < 5:
+		if columnas.size() < 6:
 			continue
 		
 		# Metemos las columnas en cada fila del diccionario
@@ -44,7 +46,8 @@ func procesar_csv(ruta_archivo: String) -> Array[Dictionary]:
 			"texto": columnas[1].strip_edges(), 
 			"ruta_fondo": columnas[2].strip_edges(),
 			"ruta_personaje": columnas[3].strip_edges(),
-			"tipo_voz": columnas[4].strip_edges()	
+			"tipo_voz": columnas[4].strip_edges(),
+			"efecto": columnas[5].strip_edges()
 		}
 		
 		datos_extraidos.append(fila)

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dxd0dtkngfl4d" path="res://scripts/visual_novel/visual_novel_main.gd" id="1_4ji1q"]
 [ext_resource type="Script" uid="uid://c5bvg03ajw324" path="res://scripts/visual_novel/renderizador_ui.gd" id="2_qhp5r"]
+[ext_resource type="Script" uid="uid://bgwv5l6ydsbs7" path="res://scripts/visual_novel/director_animaciones.gd" id="2_ulc11"]
 [ext_resource type="Script" uid="uid://cli7iayw1duxg" path="res://scripts/visual_novel/player_voice.gd" id="3_6jvkb"]
 [ext_resource type="Script" uid="uid://b2q3s81c1dp3d" path="res://scripts/visual_novel/lector_csv.gd" id="3_lvi1y"]
 [ext_resource type="FontFile" uid="uid://b82drs6w37yex" path="res://assets/ui/fuente-titulos.ttf" id="5_k243g"]
@@ -38,6 +39,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4ji1q")
+metadata/_edit_use_anchors_ = true
+
+[node name="DirectorAnimaciones" type="Node" parent="." unique_id=730935826]
+script = ExtResource("2_ulc11")
+
+[node name="TelonNegro" type="ColorRect" parent="DirectorAnimaciones" unique_id=464510374]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="RenderizadorUI" type="Node" parent="." unique_id=641130275 node_paths=PackedStringArray("fondo", "personaje", "nombre", "texto", "imagen_siguiente")]
@@ -138,7 +152,7 @@ theme_override_font_sizes/normal_font_size = 30
 theme_override_font_sizes/bold_font_size = 30
 theme_override_font_sizes/bold_italics_font_size = 30
 theme_override_font_sizes/italics_font_size = 30
-theme_override_font_sizes/mono_font_size = 26
+theme_override_font_sizes/mono_font_size = 30
 bbcode_enabled = true
 fit_content = true
 

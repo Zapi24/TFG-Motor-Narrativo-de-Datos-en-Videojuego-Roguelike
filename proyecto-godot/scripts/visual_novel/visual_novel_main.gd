@@ -9,6 +9,7 @@ const RenderizadorUIScript = preload("res://scripts/visual_novel/renderizador_ui
 
 @onready var lector_csv: LectorCSVScript = $GestorDatos as LectorCSVScript
 @onready var renderizador_ui: RenderizadorUIScript = $RenderizadorUI as RenderizadorUIScript
+@onready var director_animaciones: Node = $DirectorAnimaciones
 
 # Variables globales
 var guion: Array[Dictionary] = []
@@ -28,6 +29,7 @@ func _ready() -> void:
 	guion = lector_csv.procesar_csv(ruta_a_cargar)
 	
 	if not guion.is_empty():
+		await director_animaciones.fade_in_telon() # Ejecutamos la animación y esperamos
 		renderizador_ui.renderizar_pantalla(guion[indice_actual])
 	else:
 		printerr("ERROR CRÍTICO: El guion está vacío o el archivo no existe.")
@@ -63,8 +65,18 @@ func avanzar_dialogo() -> void:
 	if indice_actual < guion.size() - 1:
 		indice_actual += 1
 		renderizador_ui.renderizar_pantalla(guion[indice_actual])
+	else:
+		# Si ya no hay más líneas en el array ejecutamos la animación de cerrar
+		await cerrar_telon()
 
 func retroceder_dialogo() -> void:
 	if indice_actual > 0:
 		indice_actual -= 1
 		renderizador_ui.renderizar_pantalla(guion[indice_actual])
+		
+func cerrar_telon() -> void:
+	# Dejamos que se pueda interactuar más con los inputs
+	set_process_unhandled_input(false)
+	set_process(false)
+	await director_animaciones.fade_out_telon() # Ejecutamos la animación y esperamos
+	

@@ -41,10 +41,11 @@ grow_vertical = 2
 script = ExtResource("1_4ji1q")
 metadata/_edit_use_anchors_ = true
 
-[node name="RenderizadorUI" type="Node" parent="." unique_id=641130275 node_paths=PackedStringArray("fondo", "personaje", "nombre", "texto", "imagen_siguiente", "fondo_antiguo", "director_animaciones")]
+[node name="RenderizadorUI" type="Node" parent="." unique_id=641130275 node_paths=PackedStringArray("fondo", "personaje", "personaje_antiguo", "nombre", "texto", "imagen_siguiente", "fondo_antiguo", "director_animaciones")]
 script = ExtResource("2_qhp5r")
 fondo = NodePath("../Fondo")
 personaje = NodePath("../Personaje")
+personaje_antiguo = NodePath("../PersonajeAntiguo")
 nombre = NodePath("../ContenedorUI/ContenedorNombrePersonaje/NombrePersonaje")
 texto = NodePath("../ContenedorUI/Margenes/TextoDialogo")
 imagen_siguiente = NodePath("../ContenedorUI/ImagenSiguiente")

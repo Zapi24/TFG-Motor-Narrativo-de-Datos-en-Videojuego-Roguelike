@@ -3,6 +3,7 @@ extends Node
 
 @export var fondo: TextureRect
 @export var personaje: TextureRect
+@export var personaje_antiguo: TextureRect
 @export var nombre: Label
 @export var texto: RichTextLabel
 @export var imagen_siguiente: TextureRect
@@ -17,6 +18,8 @@ var cancelar_animacion: bool = false
 var id_escritura: int = 0 # Identificador único para evitar problemas de dos lineas de texto ejecutandose a la vez si se saltan muy rapido
 var tipo_voz_actual: String = "voz1" # Almacena el tipo de voz actual
 var ruta_fondo_anterior: String = "" # Para ir guardando la ruta de la iamgen de fondo y detectar cuando cambia
+var ruta_personaje_anterior: String = "" # Para ir guardando la ruta del personaje y detectar cuando cambia
+var nombre_anterior: String = "" # Para lo mismo q el resto de anteriores xd	
 
 const VELOCIDAD_BASE: float = 0.03 #  Tiempo normal entre las letras
 const PAUSA_CORTA: float = 0.15    # Pausa para comas
@@ -33,9 +36,10 @@ func renderizar_pantalla(linea_actual: Dictionary) -> void:
 	tipo_voz_actual = linea_actual.get("tipo_voz", "voz1")
 	
 	
-	var ruta_fondo_actual = linea_actual["ruta_fondo"]
 	
-	# Imagen de fondo: Comprobamos que la ruta no está vacía y el archivo existe
+	# Imagen de fondo: 
+	var ruta_fondo_actual = linea_actual["ruta_fondo"]
+	# Comprobamos que la ruta no está vacía y el archivo existe
 	if not linea_actual["ruta_fondo"].is_empty() && ResourceLoader.exists(linea_actual["ruta_fondo"]):
 		
 		# Comprobamos si el fondo ha cambiado con respecto al ultimo estado
@@ -70,15 +74,55 @@ func renderizar_pantalla(linea_actual: Dictionary) -> void:
 		if not linea_actual["ruta_fondo"].is_empty():
 			printerr("ERROR:  no se ha podido cargar la imagen del fondo para la ruta: ", linea_actual["ruta_fondo"]) 
 		
-	# Imagen del personaje
-	if not linea_actual["ruta_personaje"].is_empty() && ResourceLoader.exists(linea_actual["ruta_personaje"]):
-		personaje.texture = load(linea_actual["ruta_personaje"])
-		personaje.show()
-	else:
-		personaje.texture = null
-		personaje.hide()
-		# El personaje puede ser vacio por si no queremos mostrar en alguna iteración este	
+	# Imagen del personaje:
+	var ruta_personaje_actual: String = linea_actual["ruta_personaje"]
+	var nombre_actual: String = linea_actual["nombre"]
+	# Comprobamos que la ruta no está vacia y el archivo existe
+	if not ruta_personaje_actual.is_empty() && ResourceLoader.exists(ruta_personaje_actual):
+		#  COmprobamos que hubiese tambien una imagen anterior
+		if not ruta_personaje_anterior.is_empty():
+			# Si ambos tienen imagen, miramos el nombre para evaluar si iniciamos la animación de salto o de crossfade
+			if ruta_personaje_actual != ruta_personaje_anterior:
+				if nombre_actual != nombre_anterior:
+					# CASO 1: Crossfade: hemos cambiado de imagen y de nombre
+					personaje_antiguo.texture = personaje.texture
+					personaje_antiguo.show()
+					personaje_antiguo.modulate.a = 1.0	
+					
+					personaje.texture = load(ruta_personaje_actual)
+					await director_animaciones.crossfade_personaje(personaje)
+					
+					personaje_antiguo.hide()
+				else: 
+					# CASO 2: Salto: Hemos cambiado de imagen pero el nombre se mantiene (se ha cambiado la pose)
+					personaje.texture = load(ruta_personaje_actual)
+					personaje.show()
+					
+					await director_animaciones.salto_personaje(personaje)
+		else:
+			# CASO 3: Animación de entrar: No teniamos ningun personaje y entra uno en escena
+			personaje.texture = load(ruta_personaje_actual)
+			await director_animaciones.deslizar_personaje(personaje, true)
 		
+		# Actualizamos la memoria el personaje
+		ruta_personaje_anterior = ruta_personaje_actual
+		nombre_anterior = nombre_actual
+				
+	else:
+		if not ruta_personaje_anterior.is_empty():
+			# CASO 2: Animación de salida: Teníamos un personaje y no sale ninguno
+			await director_animaciones.deslizar_personaje(personaje,false)
+			personaje.texture = null
+		
+		# Limpiamos 
+		personaje.hide()
+		personaje_antiguo.hide()
+		ruta_personaje_anterior = ""
+		nombre_anterior = nombre_actual
+		
+		if not ruta_personaje_actual.is_empty():
+			printerr("ERROR: no se ha podido cargar la imagen del personaje para la ruta: ", ruta_personaje_actual)
+
 	# Iniciamos la escritura
 	iniciar_escritura()
 	

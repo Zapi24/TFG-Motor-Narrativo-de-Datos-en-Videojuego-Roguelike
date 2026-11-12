@@ -6,6 +6,13 @@ extends Node
 # Variables globales para controlar el tiempo
 var TIEMPO_TELON: float = 1.0 # Tiempo que tarda el fade in/out de la escena completa
 var TIEMPO_IMAGEN_FONDO = 0.8 # Tiempo quie tarda el crossfade de una imagen de fondo por otra
+var TIEMPO_PERSONAJE_FUNDIDO: float = 0.25
+var TIEMPO_PERSONAJE_SALTO: float = 0.15
+var TIEMPO_PERSONAJE_DESLIZAMIENTO: float = 0.4
+
+
+var DISTANCIA_PERSONAJE_DESLIZAMIENTO: float = 700.0 # Pixeles para salir completamente de la escena
+var ALTURA_PERSONAJE_ELEVACION: float = 30.0 # Pequeña elevación vertical
 
 
 var tween_indicador: Tween # Guardamos la referencia a la animación en bucle
@@ -40,7 +47,7 @@ func fade_out_telon() -> void:
 	
 	await tween.finished
 	
-# Crossfase: vamos a ir haciendo desaparecer la imagen de fondo antigua al mismo tiempo que mostramos la nueva.
+# Crossfade: vamos a ir haciendo desaparecer la imagen de fondo antigua al mismo tiempo que mostramos la nueva.
 func crossfade_imagen_fondo(nueva_imagen: TextureRect) -> void:
 	# Nos aseguramos de que la nueva imagen aparezca invisible
 	nueva_imagen.modulate.a = 0.0
@@ -50,7 +57,8 @@ func crossfade_imagen_fondo(nueva_imagen: TextureRect) -> void:
 	tween.tween_property(nueva_imagen, "modulate:a", 1.0, TIEMPO_IMAGEN_FONDO).set_trans(Tween.TRANS_SINE)
 	
 	await tween.finished
-	
+
+# Iniciar la animación del indicador en forma de flecha de saltar linea
 func animar_indicador_siguiente(indicador: TextureRect) -> void:
 	if indicador == null:
 		return
@@ -65,6 +73,7 @@ func animar_indicador_siguiente(indicador: TextureRect) -> void:
 	tween_indicador.tween_property(indicador, "modulate:a", 0.3, 0.6).set_trans(Tween.TRANS_SINE)
 	tween_indicador.tween_property(indicador, "modulate:a", 0.8, 0.6).set_trans(Tween.TRANS_SINE)
 
+# Detener la animación del indicador en forma de flecha de saltar linea
 func detener_indicador_siguiente(indicador: TextureRect) -> void:
 	if indicador == null:
 		return
@@ -72,3 +81,59 @@ func detener_indicador_siguiente(indicador: TextureRect) -> void:
 	if tween_indicador and tween_indicador.is_running():
 		tween_indicador.kill()
 	indicador.hide()
+	
+# Animacio personaje: funcion para deslizar al personaje desde fuera o desde dentro de la animación	
+func deslizar_personaje(personaje: TextureRect, entrada: bool) -> void:
+	var pos_escena: Vector2 = personaje.position
+	
+	# Vemos si estamos ante una entrada o una salida
+	var pos_fuera: Vector2
+	if entrada: 
+		pos_fuera = pos_escena + Vector2(-DISTANCIA_PERSONAJE_DESLIZAMIENTO, -ALTURA_PERSONAJE_ELEVACION)
+		personaje.position = pos_fuera
+	else:
+		pos_fuera = pos_escena + Vector2(DISTANCIA_PERSONAJE_DESLIZAMIENTO, ALTURA_PERSONAJE_ELEVACION)
+		personaje.position = pos_escena
+		
+	personaje.modulate.a = 1.0
+	personaje.show()
+	
+	var tween = create_tween().set_parallel(true)
+	
+	if entrada:
+		tween.tween_property(personaje, "position:x", pos_escena.x, TIEMPO_PERSONAJE_DESLIZAMIENTO).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		tween.tween_property(personaje, "position:y", pos_escena.y, TIEMPO_PERSONAJE_DESLIZAMIENTO).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	else:
+		tween.tween_property(personaje, "position:x", pos_fuera.x, TIEMPO_PERSONAJE_DESLIZAMIENTO).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		tween.tween_property(personaje, "position:y", pos_fuera.y, TIEMPO_PERSONAJE_DESLIZAMIENTO).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		
+	await tween.finished
+	
+	# Limpiamos al terminar
+	if not entrada:
+		personaje.hide()
+		personaje.position = pos_escena # Lo devolvemos a su sitio original en secreto
+
+# Animación personaje: hace un crossfade entre el personaje nuevo y el antiguo
+func crossfade_personaje(nuevo_personaje: TextureRect) -> void:
+	nuevo_personaje.modulate.a = 0.0
+	nuevo_personaje.show()
+	
+	var tween = create_tween()
+	tween.tween_property(nuevo_personaje, "modulate:a", 1.0, TIEMPO_PERSONAJE_FUNDIDO).set_trans(Tween.TRANS_SINE)
+	
+	await tween.finished
+# Animación personaje: hace un pequeño salto entre la pose del antiguo personaje y el nuevo
+func salto_personaje(personaje: TextureRect) -> void:
+	var pos_original = personaje.position
+	
+	var tween = create_tween()
+	# Sube
+	tween.tween_property(personaje, "position:y", pos_original.y - 15.0, TIEMPO_PERSONAJE_SALTO).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	# Baja
+	tween.tween_property(personaje, "position:y", pos_original.y, TIEMPO_PERSONAJE_SALTO).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	# No le ponemos un await para que no congele el texto	
+
+	
+	
+	

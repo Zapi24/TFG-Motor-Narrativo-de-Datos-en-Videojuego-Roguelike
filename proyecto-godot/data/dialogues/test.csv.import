@@ -6,10 +6,10 @@ uid="uid://3u8t57lyr2rk"
 
 [deps]
 
-files=["res://data/dialogues/test.Texto.translation", "res://data/dialogues/test.Imagen.translation", "res://data/dialogues/test.Imagen.translation", "res://data/dialogues/test.Tipo.translation"]
+files=["res://data/dialogues/test.Texto.translation", "res://data/dialogues/test.Imagen.translation", "res://data/dialogues/test.Imagen.translation", "res://data/dialogues/test.Tipo.translation", "res://data/dialogues/test.efecto.translation"]
 
 source_file="res://data/dialogues/test.csv"
-dest_files=["res://data/dialogues/test.Texto.translation", "res://data/dialogues/test.Imagen.translation", "res://data/dialogues/test.Imagen.translation", "res://data/dialogues/test.Tipo.translation"]
+dest_files=["res://data/dialogues/test.Texto.translation", "res://data/dialogues/test.Imagen.translation", "res://data/dialogues/test.Imagen.translation", "res://data/dialogues/test.Tipo.translation", "res://data/dialogues/test.efecto.translation"]
 
 [params]
 

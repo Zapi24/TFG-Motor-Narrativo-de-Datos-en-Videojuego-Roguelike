@@ -122,6 +122,13 @@ func renderizar_pantalla(linea_actual: Dictionary) -> void:
 		
 		if not ruta_personaje_actual.is_empty():
 			printerr("ERROR: no se ha podido cargar la imagen del personaje para la ruta: ", ruta_personaje_actual)
+			
+	# Para los efectos:
+	var efecto_actual: String = linea_actual.get("efecto", "").to_lower()
+	if efecto_actual == "flash":
+		director_animaciones.ejecutar_flash()
+	elif efecto_actual == "shake":
+		director_animaciones.ejecutar_shake()
 
 	# Iniciamos la escritura
 	iniciar_escritura()

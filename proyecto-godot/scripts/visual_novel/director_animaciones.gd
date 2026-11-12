@@ -12,8 +12,8 @@ var TIEMPO_PERSONAJE_FUNDIDO: float = 0.25
 var TIEMPO_PERSONAJE_SALTO: float = 0.15
 var TIEMPO_PERSONAJE_DESLIZAMIENTO: float = 0.4
 
-var TIEMPO_EFECTOS: float = 0.5
-var INTENSIDAD_SHAKE: float = 20 # Para controlar la intensidad del shake
+var TIEMPO_EFECTOS: float = 1.5
+var INTENSIDAD_SHAKE: float = 30 # Para controlar la intensidad del shake
 
 
 var DISTANCIA_PERSONAJE_DESLIZAMIENTO: float = 700.0 # Pixeles para salir completamente de la escena
@@ -165,7 +165,7 @@ func ejecutar_shake() -> void:
 	var tween = create_tween()
 	
 	# Cuantas veces va a sacudirse
-	var sacudidas: float = 10.0
+	var sacudidas: float = 30.0
 	var tiempo_por_sacudida: float = TIEMPO_EFECTOS / sacudidas
 	
 	for i in range(sacudidas):

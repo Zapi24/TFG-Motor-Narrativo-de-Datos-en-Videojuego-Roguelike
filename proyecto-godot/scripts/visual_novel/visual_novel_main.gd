@@ -25,7 +25,7 @@ func _ready() -> void:
 		ruta_a_cargar = DebugData.ruta_csv_seleccionada
 	# ---------------------------
 	
-	guion = lector_csv.procesar_csv(RUTA_TEST_CSV)
+	guion = lector_csv.procesar_csv(ruta_a_cargar)
 	
 	if not guion.is_empty():
 		renderizador_ui.renderizar_pantalla(guion[indice_actual])

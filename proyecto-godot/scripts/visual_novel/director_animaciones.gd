@@ -8,6 +8,8 @@ var TIEMPO_TELON: float = 1.0 # Tiempo que tarda el fade in/out de la escena com
 var TIEMPO_IMAGEN_FONDO = 0.8 # Tiempo quie tarda el crossfade de una imagen de fondo por otra
 
 
+var tween_indicador: Tween # Guardamos la referencia a la animación en bucle
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Nos aseguramos de que el telón empiece completamente negro bloqueando la vista
@@ -48,3 +50,25 @@ func crossfade_imagen_fondo(nueva_imagen: TextureRect) -> void:
 	tween.tween_property(nueva_imagen, "modulate:a", 1.0, TIEMPO_IMAGEN_FONDO).set_trans(Tween.TRANS_SINE)
 	
 	await tween.finished
+	
+func animar_indicador_siguiente(indicador: TextureRect) -> void:
+	if indicador == null:
+		return
+		
+	indicador.show()
+	indicador.modulate.a = 0.8 
+	
+	if tween_indicador and tween_indicador.is_running():
+		tween_indicador.kill()
+		
+	tween_indicador = create_tween().set_loops()
+	tween_indicador.tween_property(indicador, "modulate:a", 0.3, 0.6).set_trans(Tween.TRANS_SINE)
+	tween_indicador.tween_property(indicador, "modulate:a", 0.8, 0.6).set_trans(Tween.TRANS_SINE)
+
+func detener_indicador_siguiente(indicador: TextureRect) -> void:
+	if indicador == null:
+		return
+		
+	if tween_indicador and tween_indicador.is_running():
+		tween_indicador.kill()
+	indicador.hide()

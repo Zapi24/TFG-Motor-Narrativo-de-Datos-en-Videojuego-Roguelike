@@ -18,8 +18,6 @@ var id_escritura: int = 0 # Identificador único para evitar problemas de dos li
 var tipo_voz_actual: String = "voz1" # Almacena el tipo de voz actual
 var ruta_fondo_anterior: String = "" # Para ir guardando la ruta de la iamgen de fondo y detectar cuando cambia
 
-var tween_indicador: Tween # Para el tween de la imagen de avanzar
-
 const VELOCIDAD_BASE: float = 0.03 #  Tiempo normal entre las letras
 const PAUSA_CORTA: float = 0.15    # Pausa para comas
 const PAUSA_LARGA: float = 0.35 # Pausa para puntos, interrogaciones etc
@@ -157,30 +155,9 @@ func _esperar_y_validar(tiempo: float, id_instancia: int) -> bool:
 	
 # Funciones auxiliares 
 func _mostrar_indicador() -> void:
-	if imagen_siguiente == null:
-		return
-		
-	imagen_siguiente.show()
-	imagen_siguiente.modulate.a = 0.8 # Reseteamos la opacidad
-	
-	# Si ya había una animación funcionando, la detenemos
-	if tween_indicador and tween_indicador.is_running():
-		tween_indicador.kill()
-		
-	# Creamos un nuevo Tween en bucle infinito
-	tween_indicador = create_tween().set_loops()
-	
-	# Animamos la opcacidad para que baje al 30% en 0.6 segundos y vuelva al 100%
-	tween_indicador.tween_property(imagen_siguiente, "modulate:a", 0.3, 0.6).set_trans(Tween.TRANS_SINE)
-	tween_indicador.tween_property(imagen_siguiente, "modulate:a", 0.8, 0.6).set_trans(Tween.TRANS_SINE)
+	director_animaciones.animar_indicador_siguiente(imagen_siguiente)
 
 func _ocultar_indicador() -> void:
-	if imagen_siguiente == null:
-		return
-		
-	# Detenemos la animación y ocultamos el nodo
-	if tween_indicador and tween_indicador.is_running():
-		tween_indicador.kill()
-	imagen_siguiente.hide()
+	director_animaciones.detener_indicador_siguiente(imagen_siguiente)
 	
 	

@@ -30,6 +30,7 @@ func renderizar_pantalla(linea_actual: Dictionary) -> void:
 	
 	# Textos:
 	nombre.text = linea_actual["nombre"]
+	texto.visible_characters = 0
 	texto.text = linea_actual["texto"]
 	
 	# Voz:

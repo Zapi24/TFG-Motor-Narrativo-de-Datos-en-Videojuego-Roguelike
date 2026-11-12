@@ -12,7 +12,7 @@ var TIEMPO_PERSONAJE_FUNDIDO: float = 0.25
 var TIEMPO_PERSONAJE_SALTO: float = 0.15
 var TIEMPO_PERSONAJE_DESLIZAMIENTO: float = 0.4
 
-var TIEMPO_EFECTOS: float = 1.5
+var TIEMPO_EFECTOS: float = 1
 var INTENSIDAD_SHAKE: float = 30 # Para controlar la intensidad del shake
 
 
@@ -165,7 +165,7 @@ func ejecutar_shake() -> void:
 	var tween = create_tween()
 	
 	# Cuantas veces va a sacudirse
-	var sacudidas: float = 30.0
+	var sacudidas: float = 20.0
 	var tiempo_por_sacudida: float = TIEMPO_EFECTOS / sacudidas
 	
 	for i in range(sacudidas):
@@ -176,7 +176,7 @@ func ejecutar_shake() -> void:
 		# Devolvemos la cámara a su posicion central
 		tween.chain().tween_property(efecto_shake, "offset", Vector2.ZERO, tiempo_por_sacudida)
 		
-		await tween.finished
+	await tween.finished
 	
 	
 	

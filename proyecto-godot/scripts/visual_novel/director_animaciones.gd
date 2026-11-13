@@ -12,7 +12,7 @@ var TIEMPO_PERSONAJE_FUNDIDO: float = 0.25
 var TIEMPO_PERSONAJE_SALTO: float = 0.15
 var TIEMPO_PERSONAJE_DESLIZAMIENTO: float = 0.4
 
-var TIEMPO_EFECTOS: float = 1
+var TIEMPO_EFECTOS: float = 0.8
 var INTENSIDAD_SHAKE: float = 30 # Para controlar la intensidad del shake
 
 

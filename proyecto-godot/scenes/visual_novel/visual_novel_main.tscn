@@ -53,6 +53,7 @@ fondo_antiguo = NodePath("../FondoAntiguo")
 director_animaciones = NodePath("../DirectorAnimaciones")
 
 [node name="VozPersonajes" type="AudioStreamPlayer" parent="RenderizadorUI" unique_id=170440890]
+bus = &"VocesPersonajes"
 script = ExtResource("3_6jvkb")
 
 [node name="GestorDatos" type="Node" parent="." unique_id=494143456]
@@ -209,3 +210,14 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="GestorAudio" type="Node" parent="." unique_id=205644028]
+
+[node name="MusicaFondo1" type="AudioStreamPlayer" parent="GestorAudio" unique_id=1572183726]
+bus = &"MusicaFondo"
+
+[node name="MusicaFondo2" type="AudioStreamPlayer" parent="GestorAudio" unique_id=450029246]
+bus = &"MusicaFondo"
+
+[node name="EfectosSonido" type="AudioStreamPlayer" parent="GestorAudio" unique_id=1812790265]
+bus = &"EfectosSonido"

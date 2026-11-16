@@ -4,8 +4,10 @@
 #     "texto": "Hola",
 #     "ruta_fondo": "res://assets/fondo.png",
 #     "ruta_personaje": "res://assets/personaje.png",
-#     "tipo_voz: "voz1"
-#     "efecto: "flash" (solo admite dos tipos de efectos o el flash o el shake)
+#     "tipo_voz": "voz1"
+#     "efecto": "flash" (solo admite dos tipos de efectos o el flash o el shake)
+#     "musica_fondo": "res://assets/sounds/musica_fondo.ogg"
+#     "efecto_sonido": "res://assets/sounds/efecto_sonido.ogg"
 # }
 
 extends Node
@@ -35,9 +37,12 @@ func procesar_csv(ruta_archivo: String) -> Array[Dictionary]:
 		# columnas[3] # "res://assets/personaje.png"	
 		# columnas[4] # "voz1" (Tipo de voz)
 		# columnas[5] # "flash" 
+		# columnas[6] # "res://assets/sounds/musica_fondo.ogg" 
+		# columnas[7] # "res://assets/sounds/efecto_sonido.ogg" 
+		
 		var columnas: PackedStringArray = csv.get_csv_line(",")
 		
-		if columnas.size() < 6:
+		if columnas.size() < 8:
 			continue
 		
 		# Metemos las columnas en cada fila del diccionario
@@ -47,7 +52,9 @@ func procesar_csv(ruta_archivo: String) -> Array[Dictionary]:
 			"ruta_fondo": columnas[2].strip_edges(),
 			"ruta_personaje": columnas[3].strip_edges(),
 			"tipo_voz": columnas[4].strip_edges(),
-			"efecto": columnas[5].strip_edges()
+			"efecto": columnas[5].strip_edges(),
+			"musica_fondo": columnas[6].strip_edges(),
+			"efecto_sonido": columnas[7].strip_edges()
 		}
 		
 		datos_extraidos.append(fila)

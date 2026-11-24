@@ -37,8 +37,6 @@ func renderizar_pantalla(linea_actual: Dictionary) -> void:
 	# Voz:
 	tipo_voz_actual = linea_actual.get("tipo_voz", "voz1")
 	
-	
-	
 	# Imagen de fondo: 
 	var ruta_fondo_actual = linea_actual["ruta_fondo"]
 	# Comprobamos que la ruta no está vacía y el archivo existe
@@ -124,6 +122,16 @@ func renderizar_pantalla(linea_actual: Dictionary) -> void:
 		
 		if not ruta_personaje_actual.is_empty():
 			printerr("ERROR: no se ha podido cargar la imagen del personaje para la ruta: ", ruta_personaje_actual)
+	
+	# Para la musica de fondo y los efectos de audio
+	var musica_fondo: String = linea_actual.get("musica_fondo", "")
+	var efecto_sonido: String = linea_actual.get("efecto_sonido", "")
+	
+	if not musica_fondo.is_empty() or not musica_fondo == "":
+		gestor_audio.cambiar_cancion(musica_fondo)
+		
+	if not efecto_sonido.is_empty() or not efecto_sonido == "":
+		gestor_audio.reproducir_efecto_sonido(efecto_sonido)
 			
 	# Para los efectos:
 	var efecto_actual: String = linea_actual.get("efecto", "").to_lower()
@@ -150,7 +158,6 @@ func iniciar_escritura() -> void:
 	# get_parsed_text() obtiene el texto limpio sin etiquetas BBCode internas
 	var texto_limpio: String = texto.get_parsed_text()
 	var long: int = texto_limpio.length()
-	
 	
 	if long == 0: # Hemos introducido un texto vació, asi que no tenemos que poner nada
 		texto.visible_characters = -1

@@ -9,6 +9,7 @@ extends Node
 @export var imagen_siguiente: TextureRect
 @export var fondo_antiguo: TextureRect
 @export var director_animaciones: Node 
+@export var gestor_audio: Node
 
 @onready var voz_personajes: AudioStreamPlayer = $VozPersonajes
 

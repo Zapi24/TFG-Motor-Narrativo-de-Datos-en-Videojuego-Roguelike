@@ -5,8 +5,10 @@
 [ext_resource type="Script" uid="uid://bgwv5l6ydsbs7" path="res://scripts/visual_novel/director_animaciones.gd" id="2_ulc11"]
 [ext_resource type="Script" uid="uid://cli7iayw1duxg" path="res://scripts/visual_novel/player_voice.gd" id="3_6jvkb"]
 [ext_resource type="Script" uid="uid://b2q3s81c1dp3d" path="res://scripts/visual_novel/lector_csv.gd" id="3_lvi1y"]
+[ext_resource type="Texture2D" uid="uid://ckxmwk2v0v8a5" path="res://assets/ui/volumen_on.png" id="5_4qjjp"]
 [ext_resource type="FontFile" uid="uid://b82drs6w37yex" path="res://assets/ui/fuente-titulos.ttf" id="5_k243g"]
 [ext_resource type="FontFile" uid="uid://duk8q0ukomram" path="res://assets/ui/fuente-textos.ttf" id="6_4vw31"]
+[ext_resource type="Texture2D" uid="uid://b0pq4w7kncqwb" path="res://assets/ui/ojo_on.png" id="6_028x7"]
 [ext_resource type="Texture2D" uid="uid://jgddc7ayamwr" path="res://assets/ui/siguiente.png" id="7_rxent"]
 [ext_resource type="Script" uid="uid://d2vsv8b2q3vgm" path="res://scripts/visual_novel/gestor_audio.gd" id="9_xx1p3"]
 
@@ -31,6 +33,27 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 shadow_color = Color(0.8346143, 0.8346143, 0.8346143, 0.6)
 shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r018u"]
+bg_color = Color(0, 0, 0, 0.5882353)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_icbwv"]
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_21fld"]
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_color = Color(0.49803922, 0.49803922, 0.49803922, 0.60784316)
+shadow_size = 10
 
 [node name="VisualNovelMain" type="Control" unique_id=1570209122]
 layout_mode = 3
@@ -186,10 +209,53 @@ expand_mode = 1
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
+[node name="ContenedorBotones" type="MarginContainer" parent="." unique_id=2094090910]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.90416664
+anchor_right = 1.0
+anchor_bottom = 0.09259259
+grow_horizontal = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(-10, 10)
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ContenedorBotones" unique_id=249938098]
+layout_mode = 2
+alignment = 1
+
+[node name="BotonMute" type="Button" parent="ContenedorBotones/HBoxContainer" unique_id=1497512116]
+custom_minimum_size = Vector2(80, 80)
+custom_maximum_size = Vector2(120, 120)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_r018u")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_icbwv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_21fld")
+icon = ExtResource("5_4qjjp")
+expand_icon = true
+
+[node name="BotonOcultar" type="Button" parent="ContenedorBotones/HBoxContainer" unique_id=837115360]
+custom_minimum_size = Vector2(80, 80)
+custom_maximum_size = Vector2(120, 120)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_r018u")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_icbwv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_21fld")
+icon = ExtResource("6_028x7")
+icon_alignment = 1
+expand_icon = true
+
 [node name="DirectorAnimaciones" type="Node" parent="." unique_id=730935826]
 script = ExtResource("2_ulc11")
 
 [node name="TelonNegro" type="ColorRect" parent="DirectorAnimaciones" unique_id=464510374]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -197,7 +263,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
-metadata/_edit_use_anchors_ = true
 
 [node name="EfectoShake" type="Camera2D" parent="DirectorAnimaciones" unique_id=707337866]
 visible = false

@@ -6,7 +6,7 @@ extends Node
 @onready var efectos_sonido: AudioStreamPlayer = $EfectosSonido
 
 var cancion_activa: AudioStreamPlayer = null
-var ruta_cancion_atual: String = ""
+var ruta_cancion_actual: String = ""
 var TIEMPO_CROSSFADE_AUDIO: float = 1.5
 
 # Lo cargamos nada mas empezar
@@ -29,20 +29,51 @@ func reproducir_efecto_sonido(ruta: String) -> void:
 
 # Para las canciones de fondo
 func cambiar_cancion(nueva_ruta: String) -> void:
-	
-	
-	
-func cambiar_cancion(nueva_ruta: String) -> void:
-	# 1. Única restricción: si la celda del Excel está vacía, no se hace nada y la música sigue
-	if nueva_ruta.is_empty():
+	# Si la celda del excel (ruta) está vacía, no cambiamos nada continua la reproducción de la canción actual
+	if nueva_ruta.is_empty() or nueva_ruta == "":
 		return
-		
-	# 2. Validación de seguridad en disco
+	
 	if not ResourceLoader.exists(nueva_ruta):
-		printerr("ERROR: No se encuentra el archivo de audio para la ruta: ", nueva_ruta)
+		printerr("ERROR: No se ha podido acceder al archivo de audio con ruta: ", nueva_ruta)
 		return
 		
-	# 3. Determinamos reproductor entrante y saliente
-	var reproductor_entrante: AudioStreamPlayer
-	var reproductor_saliente: AudioStreamPlayer = cancion_activa
+	# Hacemos el cambio para musica_fondo1 y 2
+	var reproductor_nuevo: AudioStreamPlayer
+	var reproductor_actual: AudioStreamPlayer = cancion_activa
+	
+	if cancion_activa == musica_fondo1:
+		reproductor_nuevo = musica_fondo2
+	else:
+		reproductor_nuevo = musica_fondo1
+			
+	# Realizamos el crossfade: 
+	# 1º Bajamos el volumen de la cancion actual si hubiese alguna sonando (lo bajamos a -80 decibelios)
+	if reproductor_actual and reproductor_actual.playing:
+		var tween_salida = create_tween()
+		tween_salida.tween_property(reproductor_actual, "volume_db", -80.0, TIEMPO_CROSSFADE_AUDIO).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		await tween_salida.finished
+		reproductor_actual.stop() # Paramos la cancion cuando haya terminado
+		
+	# 2º Ponemos la segunda cancion:
+	reproductor_nuevo.stream = load(nueva_ruta)
+	reproductor_nuevo.volume_db = -80.0 # Empezamos en silencio
+	reproductor_nuevo.play()
+	
+	var tween_entrada = create_tween()
+	tween_entrada.tween_property(reproductor_nuevo, "volume_db", 0.0, TIEMPO_CROSSFADE_AUDIO).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	await tween_entrada.finished
+	
+	# Actualizamos la memoria del gestor
+	cancion_activa = reproductor_nuevo
+	ruta_cancion_actual = nueva_ruta
+	
+# Para el botón de la interfaz para silenciar el canal MusicaFondo
+func alternar_mute_musica() -> bool:
+	var bus_id = AudioServer.get_bus_index("MusicaFondo")
+	if bus_id != -1:
+		var esta_muteado = AudioServer.is_bus_mute(bus_id)
+		AudioServer.set_bus_mute(bus_id, not esta_muteado) # Si era true (estaba muteado) pasa a false y viceversa
+		return not esta_muteado
+	return false
+
 	

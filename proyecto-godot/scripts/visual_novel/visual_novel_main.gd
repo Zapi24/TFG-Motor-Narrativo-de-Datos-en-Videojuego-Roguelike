@@ -138,9 +138,3 @@ func _actualzar_icono_ocultar(esta_oculto: bool) -> void:
 	else:
 		if ojo_on:
 			boton_ocultar.icon = ojo_on
-		
-		
-	
-			
-
-	

@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://h1x5b60736nb"]
 
 [ext_resource type="Script" uid="uid://dxd0dtkngfl4d" path="res://scripts/visual_novel/visual_novel_main.gd" id="1_4ji1q"]
+[ext_resource type="Texture2D" uid="uid://b7av2ky1ntrkx" path="res://assets/ui/ojo_off.png" id="2_028x7"]
+[ext_resource type="Texture2D" uid="uid://cbywqpuss3v0b" path="res://assets/ui/volumen_off.png" id="2_j02ye"]
 [ext_resource type="Script" uid="uid://c5bvg03ajw324" path="res://scripts/visual_novel/renderizador_ui.gd" id="2_qhp5r"]
 [ext_resource type="Script" uid="uid://bgwv5l6ydsbs7" path="res://scripts/visual_novel/director_animaciones.gd" id="2_ulc11"]
 [ext_resource type="Script" uid="uid://cli7iayw1duxg" path="res://scripts/visual_novel/player_voice.gd" id="3_6jvkb"]
@@ -63,6 +65,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4ji1q")
+audio_on = ExtResource("2_j02ye")
+audio_off = ExtResource("5_4qjjp")
+ojo_on = ExtResource("6_028x7")
+ojo_off = ExtResource("2_028x7")
 metadata/_edit_use_anchors_ = true
 
 [node name="RenderizadorUI" type="Node" parent="." unique_id=641130275 node_paths=PackedStringArray("fondo", "personaje", "personaje_antiguo", "nombre", "texto", "imagen_siguiente", "fondo_antiguo", "director_animaciones", "gestor_audio")]
@@ -224,11 +230,11 @@ theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ContenedorBotones" unique_id=249938098]
+[node name="OrganizadorBotones" type="HBoxContainer" parent="ContenedorBotones" unique_id=249938098]
 layout_mode = 2
 alignment = 1
 
-[node name="BotonMute" type="Button" parent="ContenedorBotones/HBoxContainer" unique_id=1497512116]
+[node name="BotonMute" type="Button" parent="ContenedorBotones/OrganizadorBotones" unique_id=1497512116]
 custom_minimum_size = Vector2(80, 80)
 custom_maximum_size = Vector2(120, 120)
 layout_mode = 2
@@ -239,7 +245,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_21fld")
 icon = ExtResource("5_4qjjp")
 expand_icon = true
 
-[node name="BotonOcultar" type="Button" parent="ContenedorBotones/HBoxContainer" unique_id=837115360]
+[node name="BotonOcultar" type="Button" parent="ContenedorBotones/OrganizadorBotones" unique_id=837115360]
 custom_minimum_size = Vector2(80, 80)
 custom_maximum_size = Vector2(120, 120)
 layout_mode = 2

@@ -10,6 +10,18 @@ const RenderizadorUIScript = preload("res://scripts/visual_novel/renderizador_ui
 @onready var lector_csv: LectorCSVScript = $GestorDatos as LectorCSVScript
 @onready var renderizador_ui: RenderizadorUIScript = $RenderizadorUI as RenderizadorUIScript
 @onready var director_animaciones: Node = $DirectorAnimaciones
+@onready var gestor_audio: Node = $GestorAudio
+
+@onready var contenedor_ui: Panel = $ContenedorUI
+@onready var boton_mute: Button = $ContenedorBotones/OrganizadorBotones/BotonMute
+@onready var boton_ocultar: Button = $ContenedorBotones/OrganizadorBotones/BotonOcultar
+
+@export var audio_on: Texture2D
+@export var audio_off: Texture2D
+@export var ojo_on: Texture2D
+@export var ojo_off: Texture2D
+
+
 
 # Variables globales
 var guion: Array[Dictionary] = []

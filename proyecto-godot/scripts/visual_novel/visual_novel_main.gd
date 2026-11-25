@@ -21,14 +21,19 @@ const RenderizadorUIScript = preload("res://scripts/visual_novel/renderizador_ui
 @export var ojo_on: Texture2D
 @export var ojo_off: Texture2D
 
-
-
 # Variables globales
 var guion: Array[Dictionary] = []
 var indice_actual: int = 0
+var ui_oculta: bool = false # Para saber si el cuadro de texto esta oculto o no
 const RUTA_TEST_CSV: String = "res://data/dialogues/test.csv" # Ahora mismo es el unico csv que reconoce
 
 func _ready() -> void:
+	# Cargamos las funciones de pulsado de los botones
+	boton_mute.pressed.connect(_on_boton_mute_pulsado)
+	boton_ocultar.pressed.connect(_on_boton_ocultar_pulsado)
+	
+	_actualizar_icono_mute(false)
+	_actualzar_icono_ocultar(false)
 	
 	# --- HACK TEMPORAL DE QA ---
 	var ruta_a_cargar: String = RUTA_TEST_CSV
@@ -47,6 +52,11 @@ func _ready() -> void:
 		printerr("ERROR CRÍTICO: El guion está vacío o el archivo no existe.")
 		
 func _process(_delta: float) -> void:
+	
+	# Si el modo interfaz esta oculto, bloqueamos la navegación por teclado para que no siga avanzando
+	if ui_oculta:
+		return
+	
 	# Captura de entrada bidireccional para pruebas Alpha
 	if Input.is_action_just_pressed("ui_right"):
 		avanzar_dialogo()
@@ -55,6 +65,11 @@ func _process(_delta: float) -> void:
 		
 # Para los eventos como la tecla espacio/enter/clic del raton 
 func _unhandled_input(event: InputEvent) -> void:
+	
+	# Si la interfaz esta oculta, ignoramos los clicks o la barra espaciadora
+	if ui_oculta: 
+		return
+		
 	var es_espacio_o_enter: bool = event.is_action_pressed("ui_accept")
 	
 	# Detecta si es un clic izquierdo del ratón
@@ -90,5 +105,42 @@ func cerrar_telon() -> void:
 	# Dejamos que se pueda interactuar más con los inputs
 	set_process_unhandled_input(false)
 	set_process(false)
-	await director_animaciones.fade_out_telon() # Ejecutamos la animación y esperamos
+	await director_animaciones.fade_out_telon() # Ejecutamos la animación y 
+	
+	
+# Logica de botontes de la interfaz en la pantalla superior izquierda
+func _on_boton_mute_pulsado() -> void:
+	var esta_muteado: bool = gestor_audio.alternar_mute_musica()
+	_actualizar_icono_mute(esta_muteado)
+	
+func _actualizar_icono_mute(esta_muteado: bool) -> void:
+	if esta_muteado:
+		if audio_off:
+			boton_mute.icon = audio_off
+	else:
+		if audio_on:
+			boton_mute.icon = audio_on
+			
+func _on_boton_ocultar_pulsado() -> void:
+	ui_oculta = not ui_oculta # Alternamos el valor que tuviese
+	
+	if ui_oculta :
+		contenedor_ui.hide()
+	else:
+		contenedor_ui.show()
+		
+	_actualzar_icono_ocultar(ui_oculta)
+		
+func _actualzar_icono_ocultar(esta_oculto: bool) -> void:
+	if esta_oculto:
+		if ojo_off:
+			boton_ocultar.icon = ojo_off
+	else:
+		if ojo_on:
+			boton_ocultar.icon = ojo_on
+		
+		
+	
+			
+
 	

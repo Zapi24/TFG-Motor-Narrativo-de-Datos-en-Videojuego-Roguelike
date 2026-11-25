@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c56cjdpf0ufj3"
+
+[deps]
+
+files=["res://data/dialogues/test3.Texto.translation", "res://data/dialogues/test3.Imagen.translation", "res://data/dialogues/test3.Imagen.translation", "res://data/dialogues/test3.Tipo.translation", "res://data/dialogues/test3.efecto.translation", "res://data/dialogues/test3.Musica.translation", "res://data/dialogues/test3.Efecto.translation"]
+
+source_file="res://data/dialogues/test3.csv"
+dest_files=["res://data/dialogues/test3.Texto.translation", "res://data/dialogues/test3.Imagen.translation", "res://data/dialogues/test3.Imagen.translation", "res://data/dialogues/test3.Tipo.translation", "res://data/dialogues/test3.efecto.translation", "res://data/dialogues/test3.Musica.translation", "res://data/dialogues/test3.Efecto.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true
